@@ -61,6 +61,9 @@ public class Controllers {
     public String agregarEstudiante(@RequestParam("nombre") String nombre,
                                     @RequestParam("apellido") String apellido,
                                     @RequestParam("cursoId") Long cursoId) {
+        System.out.println(nombre);
+        System.out.println(apellido);
+        System.out.println(cursoId);
         Estudiante estudiante = new Estudiante();
         estudiante.setNombre(nombre);
         estudiante.setApellido(apellido);

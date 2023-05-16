@@ -43,7 +43,7 @@
   <input type="text" id="apellido" name="apellido" required>
   <br>
   <label for="curso">Curso:</label>
-  <select name="curso" id="curso">
+  <select name="cursoId" id="curso">
     <!-- iterar sobre la lista de cursos -->
     <option th:each="curso : ${cursos}" th:value="${curso.id}" th:text="${curso.titulo}"></option>
   </select>
