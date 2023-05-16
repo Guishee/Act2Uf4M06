@@ -15,12 +15,12 @@ public class Curso {
     private String url;
 
 
-    /*
-    @OneToMany(mappedBy = "curso")
+    //probando relacion onetomany manytoone
+    /*@OneToMany(mappedBy = "curso")
     private List<Estudiante> estudiantes = new ArrayList<>();*/
 
-/*    @ManyToMany(mappedBy = "cursos")
-    private List<Estudiante> estudiantes = new ArrayList<>();*/
+    @ManyToMany(mappedBy = "cursos")
+    private List<Estudiante> estudiantes = new ArrayList<>();
 
     public Curso(String titulo, String descripcion, String url) {
         this.titulo = titulo;
@@ -32,6 +32,14 @@ public class Curso {
     public Curso() {
     }
 
+
+    public List<Estudiante> getEstudiantes() {
+        return estudiantes;
+    }
+
+    public void setEstudiantes(List<Estudiante> estudiantes) {
+        this.estudiantes = estudiantes;
+    }
 
     public String getTitulo() {
         return titulo;
@@ -63,7 +71,7 @@ public class Curso {
         this.id = id;
     }
 
-    @Id
+
     public Long getId() {
         return id;
     }

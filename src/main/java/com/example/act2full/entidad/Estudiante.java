@@ -16,24 +16,33 @@ public class Estudiante {
     private String nombre;
     private String apellido;
 
-
-   /* @ManyToOne
+    //probando relacion
+    /*@ManyToOne
     @JoinColumn(name = "curso_id")
     private Curso curso;*/
 
-    /*@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "estudiante_curso",
             joinColumns = @JoinColumn(name = "estudiante_id"),
             inverseJoinColumns = @JoinColumn(name = "curso_id")
     )
-    private List<Curso> cursos = new ArrayList<>();*/
+    private List<Curso> cursos = new ArrayList<>();
     public Estudiante() {
     }
 
     public Estudiante(String nombre, String apellido) {
         this.nombre = nombre;
         this.apellido = apellido;
+    }
+
+
+    public List<Curso> getCursos() {
+        return cursos;
+    }
+
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
     }
 
     public String getNombre() {
@@ -57,7 +66,7 @@ public class Estudiante {
         this.id = id;
     }
 
-    @Id
+
     public Long getId() {
         return id;
     }

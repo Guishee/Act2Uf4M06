@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -23,32 +24,55 @@ public class Controllers {
 
     //CURSO
     @GetMapping("/cursos")
-    public String mostrarCursos(Model model) {
+    public String listarCursos(Model model) {
         List<Curso> cursos = cursoRepo.findAll();
         model.addAttribute("cursos", cursos);
-        model.addAttribute("nuevoCurso", new Curso());
         return "lista-cursos";
     }
 
-    @PostMapping("/cursos/agregar")
-    public String agregarCurso(@ModelAttribute Curso nuevoCurso) {
-        cursoRepo.save(nuevoCurso);
+    @PostMapping("/cursos-add")
+    public String agregarCurso(@RequestParam("titulo") String titulo,
+                               @RequestParam("descripcion") String descripcion,
+                               @RequestParam("url") String url) {
+        Curso curso = new Curso();
+        curso.setTitulo(titulo);
+        curso.setDescripcion(descripcion);
+        curso.setUrl(url);
+
+        cursoRepo.save(curso);
+
         return "redirect:/cursos";
     }
 
     //ESTUDIANTE
 
     @GetMapping("/estudiantes")
-    public String mostrarEstudiantes(Model model) {
+    public String listarEstudiantes(Model model) {
         List<Estudiante> estudiantes = estudianteRepo.findAll();
+        List<Curso> cursos = cursoRepo.findAll();
+
         model.addAttribute("estudiantes", estudiantes);
-        model.addAttribute("nuevoEstudiante", new Estudiante());
+        model.addAttribute("cursos", cursos);
+
         return "lista-estudiantes";
     }
 
-    @PostMapping("/estudiantes/agregar")
-    public String agregarEstudiante(@ModelAttribute Estudiante nuevoEstudiante) {
-        estudianteRepo.save(nuevoEstudiante);
+    @PostMapping("/estudiantes-add")
+    public String agregarEstudiante(@RequestParam("nombre") String nombre,
+                                    @RequestParam("apellido") String apellido,
+                                    @RequestParam("cursoId") Long cursoId) {
+        Estudiante estudiante = new Estudiante();
+        estudiante.setNombre(nombre);
+        estudiante.setApellido(apellido);
+
+        Curso curso = cursoRepo.findById(cursoId).orElse(null);
+        if (curso != null) {
+            estudiante.getCursos().add(curso);
+            curso.getEstudiantes().add(estudiante);
+        }
+
+        estudianteRepo.save(estudiante);
+
         return "redirect:/estudiantes";
     }
 }

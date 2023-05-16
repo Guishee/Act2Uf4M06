@@ -16,26 +16,40 @@
   <tr>
     <th>Nombre</th>
     <th>Apellido</th>
+    <th>Cursos</th>
   </tr>
   </thead>
   <tbody>
+  <!-- iterar sobre la lista de estudiantes -->
   <tr th:each="estudiante : ${estudiantes}">
     <td th:text="${estudiante.nombre}"></td>
     <td th:text="${estudiante.apellido}"></td>
+    <td>
+      <!-- iterar sobre los cursos del estudiante -->
+      <ul>
+        <li th:each="curso : ${estudiante.cursos}" th:text="${curso.titulo}"></li>
+      </ul>
+    </td>
   </tr>
   </tbody>
 </table>
 
 <h2>Añadir Estudiante</h2>
-
-<form th:action="@{/estudiantes/agregar}" th:object="${nuevoEstudiante}" method="post">
+<form action="/estudiantes-add" method="POST">
   <label for="nombre">Nombre:</label>
-  <input type="text" id="nombre" name="nombre" th:field="*{nombre}" required><br>
-
+  <input type="text" id="nombre" name="nombre" required>
+  <br>
   <label for="apellido">Apellido:</label>
-  <input type="text" id="apellido" name="apellido" th:field="*{apellido}" required><br>
-
-  <button type="submit">Añadir</button>
+  <input type="text" id="apellido" name="apellido" required>
+  <br>
+  <label for="curso">Curso:</label>
+  <select name="curso" id="curso">
+    <!-- iterar sobre la lista de cursos -->
+    <option th:each="curso : ${cursos}" th:value="${curso.id}" th:text="${curso.titulo}"></option>
+  </select>
+  <br>
+  <button type="submit">Añadir Estudiante</button>
 </form>
+
 </body>
 </html>

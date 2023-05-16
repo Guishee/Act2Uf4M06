@@ -20,6 +20,7 @@
   </tr>
   </thead>
   <tbody>
+  <!-- iterar sobre la lista de cursos -->
   <tr th:each="curso : ${cursos}">
     <td th:text="${curso.titulo}"></td>
     <td th:text="${curso.descripcion}"></td>
@@ -29,18 +30,17 @@
 </table>
 
 <h2>Añadir Curso</h2>
-
-<form th:action="@{/cursos/agregar}" th:object="${nuevoCurso}" method="post">
+<form action="/cursos-add" method="POST">
   <label for="titulo">Título:</label>
-  <input type="text" id="titulo" name="titulo" th:field="*{titulo}" required><br>
-
+  <input type="text" id="titulo" name="titulo" required>
+  <br>
   <label for="descripcion">Descripción:</label>
-  <input type="text" id="descripcion" name="descripcion" th:field="*{descripcion}" required><br>
-
+  <input type="text" id="descripcion" name="descripcion" required>
+  <br>
   <label for="url">URL:</label>
-  <input type="text" id="url" name="url" th:field="*{url}" required><br>
-
-  <button type="submit">Añadir</button>
+  <input type="text" id="url" name="url" required>
+  <br>
+  <button type="submit">Añadir Curso</button>
 </form>
 </body>
 </html>
