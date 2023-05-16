@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Cursos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+</head>
+<body>
+<div th:replace="fragmento/navbar :: navbar"></div>
+<h1>Lista de Cursos</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Título</th>
+    <th>Descripción</th>
+    <th>URL</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="curso : ${cursos}">
+    <td th:text="${curso.titulo}"></td>
+    <td th:text="${curso.descripcion}"></td>
+    <td th:text="${curso.url}"></td>
+  </tr>
+  </tbody>
+</table>
+
+<h2>Añadir Curso</h2>
+
+<form th:action="@{/cursos/agregar}" th:object="${nuevoCurso}" method="post">
+  <label for="titulo">Título:</label>
+  <input type="text" id="titulo" name="titulo" th:field="*{titulo}" required><br>
+
+  <label for="descripcion">Descripción:</label>
+  <input type="text" id="descripcion" name="descripcion" th:field="*{descripcion}" required><br>
+
+  <label for="url">URL:</label>
+  <input type="text" id="url" name="url" th:field="*{url}" required><br>
+
+  <button type="submit">Añadir</button>
+</form>
+</body>
+</html>
