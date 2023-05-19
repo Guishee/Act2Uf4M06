@@ -14,3 +14,9 @@ Esta clase contiene los controladores que manejan las solicitudes HTTP relaciona
     -Método listarEstudiantes(Model model): Este método maneja la solicitud GET a "/estudiantes" y recupera todos los estudiantes y cursos del repositorio EstudianteRepo y CursoRepo, respectivamente. Luego, agrega los estudiantes y cursos al modelo y devuelve la vista "lista-estudiantes" para mostrarlos.
 
     -Método agregarEstudiante(String nombre, String apellido, Long cursoId): Este método maneja la solicitud POST a "/estudiantes-add" y recibe los parámetros del formulario (nombre, apellido y cursoId) a través de las anotaciones @RequestParam. Crea un nuevo objeto Estudiante, establece los valores utilizando los parámetros recibidos y busca el curso correspondiente utilizando el método findById() de CursoRepo. Si se encuentra el curso, se agrega al estudiante y el estudiante se agrega al curso. Luego, el estudiante se guarda en el repositorio EstudianteRepo. Finalmente, redirige a la página de listado de estudiantes ("/estudiantes").
+
+<h2>Archivo HTML de Thymeleaf "lista-cursos.html":</h2>
+Este archivo muestra la lista de cursos en una tabla. Utiliza Thymeleaf para iterar sobre la lista de cursos y mostrar los datos en las celdas de la tabla. También incluye un formulario para agregar un nuevo curso.
+
+<h2>Archivo HTML de Thymeleaf "lista-estudiantes.html":</h2>
+Este archivo muestra la lista de estudiantes en una tabla. Utiliza Thymeleaf para iterar sobre la lista de estudiantes y mostrar los datos en las celdas de la tabla. Además, muestra los cursos asociados a cada estudiante en una lista desplegable en la columna correspondiente. También incluye un formulario para agregar un nuevo estudiante y seleccionar un curso asociado.
